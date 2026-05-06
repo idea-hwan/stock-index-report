@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>글로벌 시장 밸류에이션 리포트 2026-04</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+  --bg: #0d0f14;
+  --surface: #161820;
+  --surface2: #1c1e27;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text: #e8eaf0;
+  --muted: #7a7e8e;
+  --accent: #c8a96e;
+  --green: #3ecf82;
+  --green-bg: rgba(62,207,130,0.13);
+  --green-border: rgba(62,207,130,0.35);
+  --red: #e05c5c;
+  --red-bg: rgba(224,92,92,0.13);
+  --red-border: rgba(224,92,92,0.35);
+  --yellow: #d4a843;
+  --yellow-bg: rgba(212,168,67,0.13);
+  --yellow-border: rgba(212,168,67,0.35);
+  --mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 72px;
+  border-bottom: 1px solid var(--border2);
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -150px; right: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(200,169,110,0.055) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.cover-sub {
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 60px;
+}
+.cover-meta {
+  display: flex;
+  gap: 48px;
+  border-top: 1px solid var(--border);
+  padding-top: 30px;
+}
+.cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.cover-meta-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cover-meta-val { font-size: 14px; color: var(--text); font-weight: 400; }
+
+/* ── SECTION WRAPPER ── */
+.section {
+  padding: 60px 72px;
+  border-bottom: 1px solid var(--border);
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+}
+.section-title { font-size: 21px; font-weight: 500; color: var(--text); }
+.section-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+/* ── VALUATION CARDS ── */
+.val-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 0;
+}
+.val-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 20px 18px 18px;
+  position: relative;
+  overflow: hidden;
+}
+.val-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.val-card.green::before { background: var(--green); }
+.val-card.red::before   { background: var(--red); }
+.val-card.yellow::before { background: var(--yellow); }
+
+.val-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.val-period {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+.val-index-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.val-index-num {
+  font-family: var(--mono);
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1;
+}
+.val-index-num.green  { color: var(--green); }
+.val-index-num.red    { color: var(--red); }
+.val-index-num.yellow { color: var(--yellow); }
+.val-index-denom {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--muted);
+}
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+.badge.green  { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-border); }
+.badge.red    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-border); }
+.badge.yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+
+.val-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 6px;
+}
+.val-metric { display: flex; flex-direction: column; gap: 1px; }
+.val-metric-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.val-metric-val {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+.val-metric-val.over    { color: var(--red); }
+.val-metric-val.under   { color: var(--green); }
+.val-metric-val.neutral { color: var(--yellow); }
+
+.val-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.val-close {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 400;
+}
+.val-combo {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── AVERAGE TABLE ── */
+.data-table-wrap {
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.data-table th {
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-weight: 400;
+}
+.data-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.data-table td.muted { color: var(--muted); font-size: 11px; }
+
+.hm-cell {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+  min-width: 64px;
+  text-align: right;
+}
+.hm-pos-hi  { background: rgba(62,207,130,0.18); color: #3ecf82; }
+.hm-pos-md  { background: rgba(62,207,130,0.10); color: #5fd69a; }
+.hm-pos-lo  { background: rgba(212,168,67,0.15); color: #d4a843; }
+.hm-neg-md  { background: rgba(224,92,92,0.15);  color: #e05c5c; }
+.hm-neg-hi  { background: rgba(224,92,92,0.25);  color: #f07070; }
+.hm-nan     { background: rgba(122,126,142,0.10); color: var(--muted); }
+.warn-tag   { font-size: 9px; color: var(--yellow); margin-left: 5px; }
+.combo-small { font-size: 10px; color: var(--muted); }
+
+/* ── MEMO ── */
+.memo-box {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 30px 34px;
+}
+.memo-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.memo-text { font-size: 14px; line-height: 2.0; color: #c4c7d4; font-weight: 300; }
+.memo-text p { margin-bottom: 18px; }
+.memo-text p:last-child { margin-bottom: 0; }
+.memo-text strong { color: var(--text); font-weight: 500; }
+.hl-g { color: var(--green); font-weight: 500; }
+.hl-r { color: var(--red); font-weight: 500; }
+.hl-y { color: var(--yellow); font-weight: 500; }
+.hl-a { color: var(--accent); font-weight: 500; }
+
+/* ── CHART IMAGES ── */
+.chart-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.chart-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 16px 6px;
+}
+.chart-block img {
+  width: 100%;
+  display: block;
+}
+.chart-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 28px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-text {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(122,126,142,0.45);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+
+  .cover {
+    padding: 48px 24px;
+    min-height: auto;
+  }
+  .cover-title { font-size: 34px; }
+  .cover-sub   { font-size: 14px; margin-bottom: 36px; }
+  .cover-meta  { flex-direction: column; gap: 16px; }
+
+  .section { padding: 36px 20px; }
+
+  .val-grid { grid-template-columns: repeat(2, 1fr); }
+  .val-index-num { font-size: 36px; }
+
+  .data-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chart-grid-2 { grid-template-columns: 1fr; }
+
+  .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-chg  { font-size: 18px; }
+
+  .hm-grid { padding: 10px; gap: 2px; }
+  .hm-grid-cell { padding: 6px 2px; }
+  .hm-grid-cell .ret { font-size: 10px; }
+  .hm-grid-cell .cnt { font-size: 8px; }
+  .hm-grid-header { font-size: 8px; }
+  .hm-row-label   { font-size: 8px; }
+
+  div[style*="max-width:50%"] { max-width: 100% !important; }
+
+  .footer {
+    flex-direction: column;
+    gap: 6px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cover-title { font-size: 28px; }
+  .val-grid    { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: 1fr; }
+}
+
+/* ── HEATMAP GRID ── */
+.hm-grid {
+  display: grid;
+  grid-template-columns: 28px repeat(5, 1fr);
+  gap: 3px;
+  padding: 16px;
+}
+.hm-grid-header {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 2px;
+  letter-spacing: 0.05em;
+}
+.hm-grid-cell {
+  border-radius: 5px;
+  padding: 8px 4px;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.1s;
+}
+.hm-grid-cell:hover { transform: scale(1.05); }
+.hm-grid-cell .ret { font-family: var(--mono); font-size: 11px; font-weight: 500; display: block; }
+.hm-grid-cell .cnt { font-family: var(--mono); font-size: 9px; color: var(--muted); display: block; margin-top: 2px; }
+.hm-grid-cell.current { box-shadow: 0 0 0 2px var(--accent); }
+.hm-row-label { font-family: var(--mono); font-size: 9px; color: var(--muted); display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1px; background: var(--border2); }
+.tl-item { position: relative; margin-bottom: 28px; }
+.tl-item::before { content: ''; position: absolute; left: -20px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.tl-week { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+.tl-events { display: flex; flex-direction: column; gap: 8px; }
+.tl-event { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; }
+.tl-event-date { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+.tl-event-text { font-size: 13px; line-height: 1.7; color: #c4c7d4; }
+.impact-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 16px; }
+.impact-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 16px; }
+.impact-idx { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.impact-chg { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--red); margin-bottom: 8px; }
+.impact-reason { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-label">Monthly Valuation Report</div>
+  <div class="cover-title">글로벌 시장<br>밸류에이션 리포트</div>
+  <div class="cover-sub">5대 주요 지수 밸류에이션 분석 및 기대수익률 비교</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">기준월</span>
+      <span class="cover-meta-val">2026년 04월</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">대상 지수</span>
+      <span class="cover-meta-val">S&amp;P500 · KOSPI200 · NIKKEI225 · CSI300 · EUROSTOXX50</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">분석 기준</span>
+      <span class="cover-meta-val">PER × EPS YoY 조합 히트맵</span>
+    </div>
+  </div>
+</div>
+<!-- ═══ SECTION 01: DASHBOARD ═══ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">밸류에이션 대시보드</span>
+  </div>
+
+  <!-- Valuation Cards -->
+  <div class="val-grid" style="margin-bottom:40px;">
+
+    <div class="val-card yellow">
+      <div class="val-name">S&P 500</div>
+      <div class="val-period">평균 기준: 30년 (360개월)</div>
+      <div class="val-index-row">
+        <span class="val-index-num yellow">12</span>
+        <span class="val-index-denom">/25</span>
+      </div>
+      <span class="badge yellow">중립</span>
+      <div class="val-metrics">
+        <div class="val-metric"><span class="val-metric-label">PER</span><span class="val-metric-val over">31.08</span></div>
+        <div class="val-metric"><span class="val-metric-label">PBR</span><span class="val-metric-val over">5.73</span></div>
+        <div class="val-metric"><span class="val-metric-label">Dividend</span><span class="val-metric-val over">1.08%</span></div>
+        <div class="val-metric"><span class="val-metric-label">EPS YoY</span><span class="val-metric-val neutral">8.61%</span></div>
+      </div>
+      <div class="val-footer">
+        <div class="val-close">7,209.01</div>
+        <div class="val-combo">P5 × E3</div>
+      </div>
+    </div>
+    <div class="val-card red">
+      <div class="val-name">KOSPI 200</div>
+      <div class="val-period">평균 기준: 약 24.1년 (289개월)</div>
+      <div class="val-index-row">
+        <span class="val-index-num red">24</span>
+        <span class="val-index-denom">/25</span>
+      </div>
+      <span class="badge red">고평가</span>
+      <div class="val-metrics">
+        <div class="val-metric"><span class="val-metric-label">PER</span><span class="val-metric-val over">27.04</span></div>
+        <div class="val-metric"><span class="val-metric-label">PBR</span><span class="val-metric-val over">2.34</span></div>
+        <div class="val-metric"><span class="val-metric-label">Dividend</span><span class="val-metric-val over">0.80%</span></div>
+        <div class="val-metric"><span class="val-metric-label">EPS YoY</span><span class="val-metric-val under">19.46%</span></div>
+      </div>
+      <div class="val-footer">
+        <div class="val-close">992.15</div>
+        <div class="val-combo">P5 × E4</div>
+      </div>
+    </div>
+    <div class="val-card red">
+      <div class="val-name">NIKKEI 225</div>
+      <div class="val-period">평균 기준: 약 20.8년 (250개월)</div>
+      <div class="val-index-row">
+        <span class="val-index-num red">22</span>
+        <span class="val-index-denom">/25</span>
+      </div>
+      <span class="badge red">고평가</span>
+      <div class="val-metrics">
+        <div class="val-metric"><span class="val-metric-label">PER</span><span class="val-metric-val over">20.30</span></div>
+        <div class="val-metric"><span class="val-metric-label">PBR</span><span class="val-metric-val over">1.81</span></div>
+        <div class="val-metric"><span class="val-metric-label">Dividend</span><span class="val-metric-val over">1.57%</span></div>
+        <div class="val-metric"><span class="val-metric-label">EPS YoY</span><span class="val-metric-val under">19.53%</span></div>
+      </div>
+      <div class="val-footer">
+        <div class="val-close">59,284.92</div>
+        <div class="val-combo">P5 × E4</div>
+      </div>
+    </div>
+    <div class="val-card yellow">
+      <div class="val-name">CSI 300</div>
+      <div class="val-period">평균 기준: 약 11.0년 (132개월)</div>
+      <div class="val-index-row">
+        <span class="val-index-num yellow">18</span>
+        <span class="val-index-denom">/25</span>
+      </div>
+      <span class="badge yellow">중립</span>
+      <div class="val-metrics">
+        <div class="val-metric"><span class="val-metric-label">PER</span><span class="val-metric-val over">15.89</span></div>
+        <div class="val-metric"><span class="val-metric-label">PBR</span><span class="val-metric-val over">1.51</span></div>
+        <div class="val-metric"><span class="val-metric-label">Dividend</span><span class="val-metric-val under">2.95%</span></div>
+        <div class="val-metric"><span class="val-metric-label">EPS YoY</span><span class="val-metric-val neutral">-0.11%</span></div>
+      </div>
+      <div class="val-footer">
+        <div class="val-close">4,807.31</div>
+        <div class="val-combo">P5 × E3</div>
+      </div>
+    </div>
+    <div class="val-card green">
+      <div class="val-name">EUROSTOXX 50 <span class="warn-tag">⚠ 데이터 부족</span></div>
+      <div class="val-period">평균 기준: 약 2.7년 (32개월)</div>
+      <div class="val-index-row">
+        <span class="val-index-num green">4</span>
+        <span class="val-index-denom">/25</span>
+      </div>
+      <span class="badge green">저평가</span>
+      <div class="val-metrics">
+        <div class="val-metric"><span class="val-metric-label">PER</span><span class="val-metric-val over">18.20</span></div>
+        <div class="val-metric"><span class="val-metric-label">PBR</span><span class="val-metric-val over">2.59</span></div>
+        <div class="val-metric"><span class="val-metric-label">Dividend</span><span class="val-metric-val over">2.59%</span></div>
+        <div class="val-metric"><span class="val-metric-label">EPS YoY</span><span class="val-metric-val under">6.43%</span></div>
+      </div>
+      <div class="val-footer">
+        <div class="val-close">5,881.51</div>
+        <div class="val-combo">P5 × E5</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section-sub">장기 평균 데이터</div>
+  <div class="data-table-wrap" style="margin-bottom:36px;">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>지수</th><th>기간</th>
+          <th>PER 평균</th><th>PBR 평균</th>
+          <th>Dividend 평균</th><th>EPS YoY 평균</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S&P 500</td>
+          <td class="muted">30년 (360개월)</td>
+          <td>23.88</td>
+          <td>3.26</td>
+          <td>1.77%</td>
+          <td>10.10%</td>
+        </tr>
+        <tr>
+          <td>KOSPI 200</td>
+          <td class="muted">약 24.1년 (289개월)</td>
+          <td>13.93</td>
+          <td>1.20</td>
+          <td>1.72%</td>
+          <td>14.87%</td>
+        </tr>
+        <tr>
+          <td>NIKKEI 225</td>
+          <td class="muted">약 20.8년 (250개월)</td>
+          <td>16.98</td>
+          <td>1.34</td>
+          <td>1.76%</td>
+          <td>13.93%</td>
+        </tr>
+        <tr>
+          <td>CSI 300</td>
+          <td class="muted">약 11.0년 (132개월)</td>
+          <td>13.28</td>
+          <td>1.50</td>
+          <td>2.50%</td>
+          <td>2.20%</td>
+        </tr>
+        <tr>
+          <td>EUROSTOXX 50 <span class="warn-tag">⚠ 데이터 부족</span></td>
+          <td class="muted">약 2.7년 (32개월)</td>
+          <td>16.41</td>
+          <td>2.12</td>
+          <td>2.79%</td>
+          <td>-2.22%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-sub">조합별 과거 평균 기대수익률 비교</div>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead><tr><th>지수</th><th>데이터 기간</th><th>현재 조합</th><th>기대수익률</th><th>전월 조합</th><th>기대수익률</th><th>전분기 조합</th><th>기대수익률</th><th>전기 조합</th><th>기대수익률</th></tr></thead>
+      <tbody><tr><td>S&P 500</td><td class="muted">30년</td><td><span class="combo-small">P5×E3</span></td><td><span class="hm-cell hm-pos-md">+9.02%</span></td><td><span class="combo-small">P4×E2</span></td><td><span class="hm-cell hm-pos-md">+13.62%</span></td><td><span class="combo-small">P4×E3</span></td><td><span class="hm-cell hm-pos-md">+8.85%</span></td><td><span class="combo-small">P4×E3</span></td><td><span class="hm-cell hm-pos-md">+8.85%</span></td></tr><tr><td>KOSPI 200</td><td class="muted">약 24.1년</td><td><span class="combo-small">P5×E4</span></td><td><span class="hm-cell hm-neg-hi">-20.74%</span></td><td><span class="combo-small">P5×E4</span></td><td><span class="hm-cell hm-neg-hi">-20.74%</span></td><td><span class="combo-small">P5×E4</span></td><td><span class="hm-cell hm-neg-hi">-20.74%</span></td><td><span class="combo-small">P2×E5</span></td><td><span class="hm-cell hm-pos-md">+10.81%</span></td></tr><tr><td>NIKKEI 225</td><td class="muted">약 20.8년</td><td><span class="combo-small">P5×E4</span></td><td><span class="hm-cell hm-neg-md">-5.65%</span></td><td><span class="combo-small">P5×E3</span></td><td><span class="hm-cell hm-pos-lo">+0.18%</span></td><td><span class="combo-small">P5×E3</span></td><td><span class="hm-cell hm-pos-lo">+0.18%</span></td><td><span class="combo-small">P3×E3</span></td><td><span class="hm-cell hm-pos-md">+10.48%</span></td></tr><tr><td>CSI 300</td><td class="muted">약 11.0년</td><td><span class="combo-small">P5×E3</span></td><td><span class="hm-cell hm-neg-md">-0.76%</span></td><td><span class="combo-small">P5×E3</span></td><td><span class="hm-cell hm-neg-md">-0.76%</span></td><td><span class="combo-small">P5×E4</span></td><td><span class="hm-cell hm-neg-hi">-12.62%</span></td><td><span class="combo-small">P2×E2</span></td><td><span class="hm-cell hm-pos-md">+10.66%</span></td></tr><tr><td>EUROSTOXX 50 <span class="warn-tag">⚠ 유보</span></td><td class="muted">약 2.7년</td><td><span class="combo-small">P5×E5</span></td><td><span class="hm-cell hm-pos-md">+12.43%</span></td><td><span class="combo-small">P5×E5</span></td><td><span class="hm-cell hm-pos-md">+12.43%</span></td><td><span class="combo-small">P5×E5</span></td><td><span class="hm-cell hm-pos-md">+12.43%</span></td><td><span class="combo-small">P5×E2</span></td><td><span class="hm-cell hm-pos-md">+13.98%</span></td></tr></tbody>
+    </table>
+  </div>
+</div>
+<!-- ═══ SECTION 02: 4월 매크로 이슈 ═══ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">4월 글로벌 매크로 이슈</span>
+  </div>
+  <div class="memo-label" style="margin-bottom:24px;">Bloomberg Source — 2026-04 · 54 Sessions · 4,500+ Articles</div>
+
+  <div class="timeline">
+
+    <!-- Week 1 -->
+    <div class="tl-item">
+      <div class="tl-week">Week 1 · Apr 1–7 · 종전 기대와 재확전 반복</div>
+      <div class="tl-events">
+        <div class="tl-event">
+          <div class="tl-event-date">4월 1일</div>
+          <div class="tl-event-text">트럼프 "2–3주 내 종전 가능" 발언 → 아시아 증시 연간 최대 단일일 랠리, 유가 <strong style="color:#3ecf82;">$100 아래로 급락</strong>. 동시에 이란 대통령도 협상 의지 표명. 미국 휘발유 $4/갤런 돌파 지속.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 2–3일</div>
+          <div class="tl-event-text">트럼프, 프라임타임 연설서 <strong style="color:#e05c5c;">재확전 의지 천명</strong> — "호르무즈 개방 전 휴전 없다." 유가 <strong style="color:#e05c5c;">$100 재돌파</strong>. S&P500 선물 -1% 급락. 미국 제조업 활동 2022년 이후 최고 속도 확장(유가 연동 비용 급등 영향). 이란, 원유 $200 가능성 시나리오 등장.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 4–5일</div>
+          <div class="tl-event-text">이란, <strong>미군 F-15E 전투기 격추</strong>. 미국 조종사 수색·구조 작전 전개. 미국 3월 고용 <strong style="color:#3ecf82;">+17.8만 명</strong>(예상 상회), 실업률 4.3%로 개선. 트럼프 "48시간 최후통첩". EU 에너지 기업 횡재세 논의 시작.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 6–7일</div>
+          <div class="tl-event-text">미군 조종사 구출 성공. 이란, <strong>LNG 탱커 호르무즈 통과 수주째 전면 차단</strong>. 트럼프 "오늘 밤 이란 끝낼 수 있다" 강경 발언. 채권시장 Fed 인상 확률 확대. 캐나다 소비자 심리 연간 최저치.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="tl-item">
+      <div class="tl-week">Week 2 · Apr 8–12 · 2주 휴전 합의 → 글로벌 대반등</div>
+      <div class="tl-events">
+        <div class="tl-event">
+          <div class="tl-event-date">4월 8일</div>
+          <div class="tl-event-text"><strong class="hl-g">미·이란 2주 휴전 공식 합의</strong> — 호르무즈 재개방 조건. 글로벌 증시 <strong style="color:#3ecf82;">10년 이래 최대 단일일 급등</strong>. 유가 <strong style="color:#3ecf82;">6년래 최대 일간 낙폭</strong>. 달러 -1%+, 이머징 통화 강세. 일본 실질임금 2021년 이후 최고 상승률 → BOJ 추가 인상 기대.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 9–10일</div>
+          <div class="tl-event-text">휴전 체결에도 <strong style="color:#e05c5c;">호르무즈 여전히 봉쇄</strong> — 이란 군사 동의 없이 통항 불가. 이스라엘, 레바논 공습 지속으로 휴전 균열 우려. 미·이란 평화회담 파키스탄 예정. 이머징 주식, 2020년 이후 최대 주간 상승. Goldman Sachs: 봉쇄 1개월 추가 지속 시 브렌트 $100+ 유지 전망.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="tl-item">
+      <div class="tl-week">Week 3 · Apr 13–18 · 협상 결렬 → 봉쇄 선언 → 이란 핵 중단 + 신고점</div>
+      <div class="tl-events">
+        <div class="tl-event">
+          <div class="tl-event-date">4월 13일</div>
+          <div class="tl-event-text">파키스탄 평화회담 <strong style="color:#e05c5c;">결렬</strong>. 트럼프, <strong style="color:#e05c5c;">호르무즈 봉쇄 공식 선언</strong> → 유가 $150 시나리오 재부상. 헝가리 대선: 오르반 16년 만에 패배 — Peter Magyar 당선.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 14일</div>
+          <div class="tl-event-text">호르무즈 봉쇄 선언에도 <strong style="color:#3ecf82;">S&P500 전쟁 이전 손실 전액 회복</strong>. 중국 1분기 GDP 예상 상회. TSMC 순이익 +58%(AI 칩 수요). 영국-프랑스, 호르무즈 해군력 파견 협의 정상회담.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 16–17일</div>
+          <div class="tl-event-text">미·이란 <strong>휴전 2주 추가 연장</strong> 협의. S&P500 <strong style="color:#3ecf82;">1월 이후 첫 사상 최고치</strong> 경신. 이스라엘–레바논 <strong>10일 휴전</strong> 발표. 트럼프 "합의 임박" 발언. IMF, 중동 성장 전망 하향. 농산물가: 이란전쟁 비료 공급 차질 → 밀 가격 급등 경고.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 18일</div>
+          <div class="tl-event-text">이란 외무장관, <strong class="hl-g">호르무즈 전면 개방 발표</strong> + <strong class="hl-g">핵 프로그램 무기한 중단 선언</strong>. 미국 증시 <strong style="color:#3ecf82;">사상 최고치</strong>, 유가 급락. 호주 연료 비축량 증가 발표. 중국 중앙은행 총재, AI가 금융 산업 구조적 변화 초래 언급.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="tl-item">
+      <div class="tl-week">Week 4 · Apr 19–28 · 재봉쇄 → 휴전 유지 + 봉쇄 동시 → AI 실적 신고점</div>
+      <div class="tl-events">
+        <div class="tl-event">
+          <div class="tl-event-date">4월 19–20일</div>
+          <div class="tl-event-text">이란, <strong style="color:#e05c5c;">하루 만에 호르무즈 재봉쇄</strong> — 선박에 발포, LNG 탱커 U턴. 미 해군, <strong>이란 선박 나포</strong>(걸프만). 유가·가스 급등. 아시아 방산주 투자자 관심 급증.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 21–22일</div>
+          <div class="tl-event-text">트럼프 "휴전 연장 가능성 희박" 발언 → 주가 소폭 하락. Apple CEO Tim Cook 사임 발표(후계자 John Ternus). 다음날 트럼프 <strong>"휴전 무기한 연장" + "해군 봉쇄 유지"</strong> 동시 선언이라는 모순적 정책. 미국 3월 소매판매 예상 대폭 상회.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 23–25일</div>
+          <div class="tl-event-text">이란 군함, 호르무즈서 추가 상선 나포. 유가 <strong style="color:#e05c5c;">$105+ 박스권</strong>. Goldman Sachs: 페르시아만 산유량 전쟁 전 대비 -57%. 동시에 AI 빅테크(AT&T, TSMC, 메타 등) 어닝 서프라이즈 → <strong style="color:#3ecf82;">주가 신고점 동시 달성</strong>. 미국 소비자 심리 4월 역대 최저.</div>
+        </div>
+        <div class="tl-event">
+          <div class="tl-event-date">4월 26–28일</div>
+          <div class="tl-event-text">미·이란 평화회담 취소. 독일, 호르무즈 해군 파견 검토. 유가 <strong style="color:#e05c5c;">$110 돌파</strong>. Goldman Sachs 유가 전망 재차 상향. 한국, 세계 8위 증시 등극(AI 관련주 랠리). Shell CEO: "호르무즈 봉쇄 <strong style="color:#e05c5c;">2027년까지 지속 가능</strong>" 경고.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Month End -->
+    <div class="tl-item">
+      <div class="tl-week">Month End · Apr 29–30 · UAE OPEC 탈퇴 · Fed 동결 · 전쟁비용 $250억</div>
+      <div class="tl-events">
+        <div class="tl-event">
+          <div class="tl-event-date">4월 29–30일</div>
+          <div class="tl-event-text"><strong class="hl-r">UAE, 5월 1일부로 OPEC 탈퇴</strong> 선언 — OPEC 산유 쿼터 관리 체계 균열. 유가 <strong style="color:#e05c5c;">전쟁 이후 최고가</strong>. <strong class="hl-a">Fed 금리 동결</strong>(4인 반대 — 이란 인플레 우려). 미국 이란전 누적 비용 <strong style="color:#e05c5c;">$250억</strong> 공식 공표. 트럼프 "핵 협상 타결 전까지 해군 봉쇄 유지" 재확인. 대만 1분기 GDP 성장률 <strong>39년래 최고</strong>(AI 특수). 주요 테크 기업(MS·Alphabet) AI 데이터센터 CAPEX $7,250억 전망.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .timeline -->
+
+  <!-- Impact Cards -->
+  <div class="section-sub" style="margin-top:40px;">지수별 월간 영향 요약</div>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-idx">S&amp;P 500</div>
+      <div class="impact-chg" style="color:var(--green);">+10.4%</div>
+      <div class="impact-reason">휴전 랠리(4/8) + AI 어닝 서프라이즈 → 사상 최고치. 전쟁 이전 손실 전액 회복. 단, PER 31배로 밸류에이션 부담 재상승</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-idx">KOSPI 200</div>
+      <div class="impact-chg" style="color:var(--green);">+33.2%</div>
+      <div class="impact-reason">3월 급락 기저효과 + 글로벌 위험선호 복귀. PER 27배(역사 평균 2배) 고평가 구간 재진입 — 히트맵 기대수익률 -20.7% 지속</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-idx">NIKKEI 225</div>
+      <div class="impact-chg" style="color:var(--green);">+16.1%</div>
+      <div class="impact-reason">휴전 기대 + 실질임금 상승 + 엔화 안정. EPS YoY +19.5% 호조에도 PER 20배 고평가 구간(역사 평균 17배 대비)</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-idx">EUROSTOXX 50</div>
+      <div class="impact-chg" style="color:var(--green);">+5.6%</div>
+      <div class="impact-reason">에너지비용 여전히 높아 상대적 부진. 프랑스 기업활동 14개월 최저. ECB 금리인상 가능성 고조. 데이터 부족으로 히트맵 신뢰도 유보</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-idx">CSI 300</div>
+      <div class="impact-chg" style="color:var(--green);">+8.0%</div>
+      <div class="impact-reason">러시아 파이프라인 완충 + AI 수요 우위. EPS YoY -0.1%로 실적 정체. PER 15.9배(평균 13.3배 대비) 부담 시작</div>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ SECTION 03: 시장 코멘트 ═══ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">시장 코멘트</span>
+  </div>
+  <div class="memo-box">
+    <div class="memo-label">Monthly Memo — 2026-04</div>
+    <div class="memo-text">
+      <p>4월은 <strong>이란 휴전 기대</strong>와 <strong>AI 어닝 서프라이즈</strong>가 동시에 작동한 달이다. 4월 8일 2주 휴전 합의, 4월 18일 이란의 핵 중단·호르무즈 개방 발표가 글로벌 랠리를 이끌었고, 모든 주요 지수가 플러스로 마감했다. 그러나 호르무즈는 재봉쇄됐고, 유가는 <strong>$105–110 박스권</strong>을 유지했다. 시장은 현실보다 앞서 달렸다.</p>
+      <p><span class="hl-y">S&amp;P500</span>은 밸류에이션 인덱스가 <strong>5→12</strong>로 상승했다. 조합이 <strong>P5×E3</strong>로 이동하면서 30년 데이터 기준 기대수익률은 <span class="hl-g">+9.02%</span>로 여전히 양호하다. 그러나 PER <strong>31.08배</strong>는 30년 평균(23.88배)을 30% 상회한다. EPS YoY 8.61%는 평균(10.10%)을 소폭 하회해 <span class="hl-y">중립(12/25)</span>권이다. 가격은 오르고 이익 성장은 둔화 중인 구간이다.</p>
+      <p><span class="hl-r">KOSPI200</span>은 +33% 급반등에도 불구하고 인덱스 <strong>24/25</strong> 고평가권을 유지했다. PER 27배는 역사 평균(13.9배)의 <strong>2배</strong>에 육박한다. <strong>P5×E4</strong> 조합의 과거 기대수익률 <span class="hl-r">-20.74%</span>는 변하지 않는다. EPS YoY 19.46% 호조가 지속되고 있지만, 이미 밸류에이션에 과잉 반영된 상태다.</p>
+      <p><span class="hl-r">NIKKEI225</span>는 P5×E3(기대수익률 +0.18%)에서 <strong>P5×E4(기대수익률 <span class="hl-r">-5.65%</span>)</strong>로 한 단계 더 악화됐다. EPS YoY +19.5% 호조에도 PER 20.3배는 역사 평균(16.98배)을 크게 웃돈다. 원유 100% 수입 취약성은 여전히 구조적 리스크다.</p>
+      <p><span class="hl-y">CSI300</span>은 인덱스 <strong>18/25 중립</strong>권으로, <strong>P5×E3</strong> 기대수익률 <span class="hl-y">-0.75%</span>로 사실상 중립이다. EPS YoY -0.11%로 실적이 정체됐고, PER은 역사 평균(13.3배) 대비 고평가 영역에 진입했다. 다만 배당수익률 2.95%(평균 2.5% 상회)가 가격 지지 요인이다.</p>
+      <p>신뢰 가능한 장기 데이터 기준으로 <span class="hl-g">미국은 P5권이지만 히트맵 기대수익률이 아직 플러스</span>고, <span class="hl-r">한국과 일본은 역대 최악의 조합에서 벗어나지 못했다</span>. <span class="hl-y">EUROSTOXX50(2.7년)</span> 히트맵은 신뢰도 유보 상태다.</p>
+    </div>
+  </div>
+</div>
+<!-- ═══ SECTION 04: 10년 가격 추이 ═══ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">10년 가격 추이 &amp; 밸류에이션 인덱스</span>
+  </div>
+  <div class="section-sub">Close Price (gold) · Valuation Index 1–25 dashed (teal)</div>
+
+  <div class="chart-grid-2">
+
+        <div class="chart-block">
+          <div class="chart-label">S&P 500 · 10Y</div>
+          <div style="position:relative; height:260px; padding: 8px 12px 12px;">
+            <canvas id="chart_sp500"></canvas>
+          </div>
+        </div>
+        <script>
+        (function() {
+          var labels  = ["2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+          var closes  = [2093.93994140625, 2099.340087890625, 2173.14990234375, 2171.330078125, 2164.330078125, 2128.679931640625, 2200.169921875, 2251.570068359375, 2285.590087890625, 2380.1298828125, 2362.340087890625, 2388.5, 2415.64990234375, 2431.389892578125, 2477.10009765625, 2474.419921875, 2521.199951171875, 2583.2099609375, 2645.10009765625, 2683.72998046875, 2816.449951171875, 2715.219970703125, 2633.449951171875, 2642.9599609375, 2718.699951171875, 2704.949951171875, 2821.169921875, 2896.9599609375, 2926.2900390625, 2717.580078125, 2790.5, 2476.9599609375, 2702.320068359375, 2798.219970703125, 2848.6298828125, 2952.330078125, 2751.530029296875, 2971.409912109375, 2980.320068359375, 2909.010009765625, 2983.68994140625, 3050.719970703125, 3143.85009765625, 3244.669921875, 3235.659912109375, 2974.280029296875, 2498.080078125, 2869.090087890625, 3038.780029296875, 3105.919921875, 3288.260009765625, 3507.43994140625, 3385.8701171875, 3296.199951171875, 3645.8701171875, 3764.610107421875, 3731.169921875, 3842.510009765625, 3992.780029296875, 4191.97998046875, 4216.52001953125, 4300.72998046875, 4406.85986328125, 4528.7998046875, 4317.16015625, 4610.6201171875, 4602.81982421875, 4778.14013671875, 4519.56982421875, 4363.14013671875, 4540.31982421875, 4130.60986328125, 4149.77978515625, 3781.0, 4112.3798828125, 3936.72998046875, 3609.780029296875, 3901.7900390625, 4087.139892578125, 3853.2900390625, 4070.070068359375, 3963.340087890625, 4102.2001953125, 4166.7900390625, 4183.02978515625, 4450.47998046875, 4578.830078125, 4530.60009765625, 4284.52001953125, 4201.27001953125, 4559.43017578125, 4745.2001953125, 4861.10986328125, 5098.509765625, 5257.97021484375, 5029.02978515625, 5297.14990234375, 5471.080078125, 5537.83984375, 5623.89013671875, 5757.72998046875, 5723.22021484375, 6040.10986328125, 5903.259765625, 5969.64990234375, 5968.330078125, 5597.52978515625, 5625.14013671875, 5896.68017578125, 6187.25, 6287.27978515625, 6401.509765625, 6664.919921875, 6882.31982421875, 6812.2998046875, 6878.10986328125, 6916.64013671875, 6878.8798828125, 6528.52001953125, 7209.009765625];
+          var indices = [16.0,5.0,5.0,5.0,15.0,15.0,15.0,15.0,15.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,13.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,23.0,22.0,21.0,22.0,21.0,8.0,21.0,15.0,21.0,8.0,15.0,15.0,16.0,16.0,16.0,16.0,13.0,5.0,16.0,20.0,20.0,24.0,24.0,24.0,24.0,24.0,24.0,24.0,24.0,14.0,14.0,25.0,19.0,19.0,19.0,19.0,10.0,10.0,10.0,10.0,10.0,22.0,22.0,22.0,22.0,21.0,8.0,8.0,8.0,1.0,1.0,1.0,4.0,16.0,1.0,16.0,16.0,16.0,16.0,16.0,16.0,8.0,16.0,15.0,15.0,13.0,13.0,13.0,5.0,13.0,13.0,13.0,13.0,13.0,13.0,13.0,13.0,13.0,17.0,15.0,13.0,13.0,13.0,13.0,13.0,13.0,12.0,12.0,12.0,13.0,5.0,5.0,12.0];
+          var ctx = document.getElementById('chart_sp500').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Close', data: closes, yAxisID: 'yClose',
+                  borderColor: '#c8a96e', backgroundColor: 'transparent',
+                  borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, order: 2
+                },
+                {
+                  label: 'Val Index', data: indices, yAxisID: 'yIndex',
+                  borderColor: '#5eead4', backgroundColor: 'transparent',
+                  borderWidth: 1.5, borderDash: [4,3],
+                  pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, spanGaps: true, order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { labels: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 10 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  backgroundColor: '#1c1e27', borderColor: 'rgba(255,255,255,0.13)', borderWidth: 1,
+                  titleColor: '#7a7e8e', bodyColor: '#e8eaf0',
+                  titleFont: { family: "'DM Mono', monospace", size: 10 },
+                  bodyFont:  { family: "'DM Mono', monospace", size: 11 },
+                  callbacks: {
+                    label: function(ctx) {
+                      var val = ctx.parsed.y;
+                      if (val === null) return null;
+                      if (ctx.dataset.label === 'Val Index') return ' Val Index: ' + val.toFixed(0) + '/25';
+                      return ' Close: ' + val.toLocaleString(undefined, {maximumFractionDigits: 1});
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 9 },
+                    maxTicksLimit: Math.ceil(labels.length / 12), maxRotation: 0 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yClose: {
+                  type: 'linear', position: 'left',
+                  ticks: { color: '#c8a96e', font: { family: "'DM Mono', monospace", size: 9 }, maxTicksLimit: 5 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yIndex: {
+                  type: 'linear', position: 'right', min: 1, max: 25,
+                  ticks: { color: '#5eead4', font: { family: "'DM Mono', monospace", size: 9 }, stepSize: 6 },
+                  grid: { drawOnChartArea: false }, border: { color: 'rgba(255,255,255,0.07)' }
+                }
+              }
+            }
+          });
+        })();
+        </script>
+
+        <div class="chart-block">
+          <div class="chart-label">KOSPI 200 · 10Y</div>
+          <div style="position:relative; height:260px; padding: 8px 12px 12px;">
+            <canvas id="chart_kospi200"></canvas>
+          </div>
+        </div>
+        <script>
+        (function() {
+          var labels  = ["2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+          var closes  = [243.58, 246.52, 253.81, 256.03, 259.18, 255.99, 254.48, 260.36, 269.56, 272.65, 281.6, 289.65, 304.03, 312.39, 317.04, 307.78, 322.49, 338.76, 324.78, 326.0, 333.36, 308.35, 314.0, 322.53, 313.22, 292.93, 298.69, 297.49, 300.17, 262.95, 276.18, 258.23, 285.79, 282.51, 280.32, 286.12, 268.16, 277.27, 265.73, 259.08, 274.42, 278.43, 277.44, 290.35, 285.05, 270.37, 226.35, 250.6, 273.19, 280.26, 299.46, 309.81, 313.51, 305.95, 352.4, 399.88, 415.45, 414.8, 419.42, 420.36, 430.32, 436.34, 426.79, 419.92, 394.79, 389.81, 383.13, 395.51, 361.6, 360.59, 363.19, 354.02, 350.51, 304.02, 322.97, 315.02, 288.27, 303.88, 322.02, 289.79, 321.19, 316.26, 320.38, 329.09, 338.08, 343.08, 351.0, 338.28, 319.45, 309.71, 334.8, 360.55, 342.41, 361.1, 374.28, 364.31, 365.48, 384.34, 380.54, 362.09, 340.72, 337.49, 325.34, 317.77, 324.55, 334.02, 338.22, 338.79, 359.62, 416.26, 420.72, 423.33, 479.37, 599.03, 553.96, 624.17, 768.4099731445312, 933.3400268554688, 744.5700073242188, 992.15];
+          var indices = [9.0,9.0,9.0,9.0,9.0,9.0,9.0,9.0,14.0,14.0,14.0,14.0,9.0,9.0,14.0,1.0,9.0,9.0,1.0,1.0,9.0,1.0,1.0,1.0,1.0,19.0,19.0,19.0,19.0,19.0,2.0,19.0,19.0,2.0,19.0,2.0,12.0,16.0,12.0,12.0,3.0,3.0,3.0,10.0,10.0,11.0,3.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,24.0,24.0,23.0,23.0,23.0,22.0,22.0,22.0,13.0,13.0,13.0,13.0,8.0,8.0,19.0,19.0,19.0,19.0,19.0,19.0,7.0,7.0,7.0,7.0,16.0,16.0,11.0,11.0,11.0,10.0,11.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,9.0,9.0,9.0,1.0,1.0,1.0,1.0,13.0,13.0,22.0,22.0,22.0,14.0,24.0,24.0,24.0,24.0,24.0,24.0,24.0];
+          var ctx = document.getElementById('chart_kospi200').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Close', data: closes, yAxisID: 'yClose',
+                  borderColor: '#c8a96e', backgroundColor: 'transparent',
+                  borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, order: 2
+                },
+                {
+                  label: 'Val Index', data: indices, yAxisID: 'yIndex',
+                  borderColor: '#5eead4', backgroundColor: 'transparent',
+                  borderWidth: 1.5, borderDash: [4,3],
+                  pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, spanGaps: true, order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { labels: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 10 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  backgroundColor: '#1c1e27', borderColor: 'rgba(255,255,255,0.13)', borderWidth: 1,
+                  titleColor: '#7a7e8e', bodyColor: '#e8eaf0',
+                  titleFont: { family: "'DM Mono', monospace", size: 10 },
+                  bodyFont:  { family: "'DM Mono', monospace", size: 11 },
+                  callbacks: {
+                    label: function(ctx) {
+                      var val = ctx.parsed.y;
+                      if (val === null) return null;
+                      if (ctx.dataset.label === 'Val Index') return ' Val Index: ' + val.toFixed(0) + '/25';
+                      return ' Close: ' + val.toLocaleString(undefined, {maximumFractionDigits: 1});
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 9 },
+                    maxTicksLimit: Math.ceil(labels.length / 12), maxRotation: 0 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yClose: {
+                  type: 'linear', position: 'left',
+                  ticks: { color: '#c8a96e', font: { family: "'DM Mono', monospace", size: 9 }, maxTicksLimit: 5 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yIndex: {
+                  type: 'linear', position: 'right', min: 1, max: 25,
+                  ticks: { color: '#5eead4', font: { family: "'DM Mono', monospace", size: 9 }, stepSize: 6 },
+                  grid: { drawOnChartArea: false }, border: { color: 'rgba(255,255,255,0.07)' }
+                }
+              }
+            }
+          });
+        })();
+        </script>
+  </div>
+
+  <div class="chart-grid-2" style="margin-top:16px;">
+
+        <div class="chart-block">
+          <div class="chart-label">NIKKEI 225 · 10Y</div>
+          <div style="position:relative; height:260px; padding: 8px 12px 12px;">
+            <canvas id="chart_nikkei225"></canvas>
+          </div>
+        </div>
+        <script>
+        (function() {
+          var labels  = ["2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+          var closes  = [16955.73, 15682.48, 16635.77, 16926.84, 16598.67, 17442.4, 18513.12, 19594.16, 19148.08, 19393.54, 18983.23, 19310.52, 19860.03, 20055.8, 19985.79, 19691.47, 20400.78, 22420.08, 22819.03, 23506.33, 23486.11, 21724.47, 21388.58, 22508.03, 22171.35, 21811.93, 22746.7, 22707.38, 24245.76, 21687.65, 22574.76, 19561.96, 20788.39, 21602.69, 21509.03, 21923.72, 20410.88, 21729.97, 21540.99, 20620.19, 21885.24, 22850.77, 23529.5, 23204.86, 22971.94, 21344.08, 18065.41, 19619.35, 22062.39, 22121.73, 22195.38, 23138.07, 23185.12, 23295.48, 26787.54, 27258.38, 28091.05, 29663.5, 29388.87, 29331.37, 28814.34, 28707.04, 27781.02, 28451.02, 28771.07, 29647.08, 27935.62, 29301.79, 27078.48, 26844.72, 27665.98, 26818.53, 27457.89, 25935.62, 27993.35, 27661.47, 26215.79, 27678.92, 28226.08, 25716.86, 27346.88, 27516.53, 28188.15, 29123.18, 31148.01, 33753.33, 33476.58, 32710.62, 31759.88, 31601.65, 33431.51, 33288.29, 36011.46, 39910.82, 39803.09, 38274.05, 38923.03, 39631.06, 38126.33, 38700.87, 38651.97, 38053.67, 38513.02, 39307.05, 38520.09, 37785.47, 35624.48, 36452.3, 37470.67, 39986.33, 40799.6, 42188.79, 44550.85, 51497.2, 49303.28, 51832.8, 53322.8515625, 58850.26953125, 51063.71875, 59284.921875];
+          var indices = [6.0,5.0,6.0,6.0,9.0,10.0,10.0,15.0,15.0,15.0,11.0,7.0,12.0,12.0,12.0,12.0,12.0,21.0,21.0,21.0,21.0,17.0,17.0,17.0,4.0,4.0,12.0,4.0,16.0,4.0,4.0,4.0,2.0,5.0,5.0,5.0,2.0,2.0,2.0,5.0,5.0,5.0,9.0,9.0,9.0,1.0,1.0,8.0,14.0,8.0,8.0,14.0,14.0,14.0,14.0,14.0,14.0,14.0,14.0,13.0,16.0,16.0,17.0,17.0,16.0,16.0,17.0,16.0,17.0,17.0,17.0,17.0,5.0,5.0,5.0,5.0,5.0,5.0,2.0,5.0,5.0,5.0,5.0,6.0,6.0,3.0,3.0,3.0,3.0,3.0,6.0,6.0,3.0,20.0,20.0,20.0,20.0,20.0,11.0,7.0,7.0,7.0,11.0,20.0,11.0,3.0,6.0,11.0,3.0,11.0,15.0,15.0,15.0,18.0,20.0,18.0,18.0,18.0,18.0,22.0];
+          var ctx = document.getElementById('chart_nikkei225').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Close', data: closes, yAxisID: 'yClose',
+                  borderColor: '#c8a96e', backgroundColor: 'transparent',
+                  borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, order: 2
+                },
+                {
+                  label: 'Val Index', data: indices, yAxisID: 'yIndex',
+                  borderColor: '#5eead4', backgroundColor: 'transparent',
+                  borderWidth: 1.5, borderDash: [4,3],
+                  pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, spanGaps: true, order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { labels: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 10 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  backgroundColor: '#1c1e27', borderColor: 'rgba(255,255,255,0.13)', borderWidth: 1,
+                  titleColor: '#7a7e8e', bodyColor: '#e8eaf0',
+                  titleFont: { family: "'DM Mono', monospace", size: 10 },
+                  bodyFont:  { family: "'DM Mono', monospace", size: 11 },
+                  callbacks: {
+                    label: function(ctx) {
+                      var val = ctx.parsed.y;
+                      if (val === null) return null;
+                      if (ctx.dataset.label === 'Val Index') return ' Val Index: ' + val.toFixed(0) + '/25';
+                      return ' Close: ' + val.toLocaleString(undefined, {maximumFractionDigits: 1});
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 9 },
+                    maxTicksLimit: Math.ceil(labels.length / 12), maxRotation: 0 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yClose: {
+                  type: 'linear', position: 'left',
+                  ticks: { color: '#c8a96e', font: { family: "'DM Mono', monospace", size: 9 }, maxTicksLimit: 5 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yIndex: {
+                  type: 'linear', position: 'right', min: 1, max: 25,
+                  ticks: { color: '#5eead4', font: { family: "'DM Mono', monospace", size: 9 }, stepSize: 6 },
+                  grid: { drawOnChartArea: false }, border: { color: 'rgba(255,255,255,0.07)' }
+                }
+              }
+            }
+          });
+        })();
+        </script>
+
+        <div class="chart-block">
+          <div class="chart-label">CSI 300 · 10Y</div>
+          <div style="position:relative; height:260px; padding: 8px 12px 12px;">
+            <canvas id="chart_csi300"></canvas>
+          </div>
+        </div>
+        <script>
+        (function() {
+          var labels  = ["2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+          var closes  = [3169.56, 3153.92, 3203.93, 3327.79, 3253.28, 3336.28, 3538.0, 3310.08, 3387.96, 3452.81, 3456.05, 3439.75, 3492.88, 3666.8, 3737.87, 3822.09, 3836.5, 4006.72, 4006.1, 4030.85, 4275.9, 4023.64, 3898.5, 3756.88, 3802.38, 3510.98, 3517.66, 3334.5, 3438.86, 3153.82, 3172.69, 3010.65, 3201.63, 3669.37, 3872.34, 3913.21, 3629.79, 3825.59, 3835.36, 3799.59, 3814.53, 3886.75, 3828.67, 4096.58, 4003.9, 3940.05, 3674.11, 3912.58, 3867.02, 4163.96, 4695.05, 4816.22, 4587.4, 4695.33, 4960.25, 5211.29, 5351.96, 5336.76, 5048.36, 5123.49, 5331.57, 5224.04, 4811.17, 4805.61, 4833.93, 4908.77, 4832.03, 4940.37, 4563.77, 4581.65, 4222.6, 4016.24, 4029.02, 4485.01, 4170.1, 4078.84, 3804.89, 3508.7, 3853.04, 3871.63, 4201.35, 4069.46, 4050.93, 4029.09, 3798.54, 3842.45, 4014.63, 3765.27, 3689.52, 3572.51, 3496.2, 3431.11, 3215.35, 3516.08, 3537.48, 3604.39, 3579.92, 3461.66, 3442.08, 3321.43, 4017.85, 3891.04, 3916.58, 3934.91, 3817.08, 3890.05, 3887.31, 3770.57, 3840.23, 3936.08, 4075.59, 4496.76, 4640.69, 4640.67, 4526.66, 4629.94, 4706.33984375, 4710.64990234375, 4450.0498046875, 4807.31005859375];
+          var indices = [9.0,17.0,17.0,7.0,6.0,5.0,5.0,5.0,5.0,5.0,5.0,5.0,16.0,16.0,19.0,19.0,18.0,21.0,21.0,22.0,21.0,21.0,21.0,21.0,12.0,4.0,4.0,2.0,4.0,2.0,2.0,14.0,2.0,12.0,12.0,12.0,6.0,8.0,8.0,7.0,1.0,1.0,13.0,12.0,1.0,1.0,13.0,4.0,12.0,22.0,20.0,20.0,18.0,18.0,18.0,19.0,19.0,19.0,19.0,23.0,20.0,20.0,21.0,21.0,22.0,22.0,22.0,20.0,22.0,22.0,12.0,13.0,9.0,7.0,17.0,17.0,11.0,11.0,11.0,15.0,13.0,17.0,17.0,13.0,14.0,14.0,17.0,14.0,14.0,14.0,14.0,11.0,11.0,11.0,11.0,11.0,10.0,10.0,11.0,11.0,5.0,3.0,3.0,6.0,7.0,7.0,6.0,9.0,13.0,4.0,12.0,22.0,20.0,21.0,21.0,null,21.0,21.0,18.0,18.0];
+          var ctx = document.getElementById('chart_csi300').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Close', data: closes, yAxisID: 'yClose',
+                  borderColor: '#c8a96e', backgroundColor: 'transparent',
+                  borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, order: 2
+                },
+                {
+                  label: 'Val Index', data: indices, yAxisID: 'yIndex',
+                  borderColor: '#5eead4', backgroundColor: 'transparent',
+                  borderWidth: 1.5, borderDash: [4,3],
+                  pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, spanGaps: true, order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { labels: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 10 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  backgroundColor: '#1c1e27', borderColor: 'rgba(255,255,255,0.13)', borderWidth: 1,
+                  titleColor: '#7a7e8e', bodyColor: '#e8eaf0',
+                  titleFont: { family: "'DM Mono', monospace", size: 10 },
+                  bodyFont:  { family: "'DM Mono', monospace", size: 11 },
+                  callbacks: {
+                    label: function(ctx) {
+                      var val = ctx.parsed.y;
+                      if (val === null) return null;
+                      if (ctx.dataset.label === 'Val Index') return ' Val Index: ' + val.toFixed(0) + '/25';
+                      return ' Close: ' + val.toLocaleString(undefined, {maximumFractionDigits: 1});
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 9 },
+                    maxTicksLimit: Math.ceil(labels.length / 12), maxRotation: 0 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yClose: {
+                  type: 'linear', position: 'left',
+                  ticks: { color: '#c8a96e', font: { family: "'DM Mono', monospace", size: 9 }, maxTicksLimit: 5 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yIndex: {
+                  type: 'linear', position: 'right', min: 1, max: 25,
+                  ticks: { color: '#5eead4', font: { family: "'DM Mono', monospace", size: 9 }, stepSize: 6 },
+                  grid: { drawOnChartArea: false }, border: { color: 'rgba(255,255,255,0.07)' }
+                }
+              }
+            }
+          });
+        })();
+        </script>
+  </div>
+
+  <div style="margin-top:16px; max-width:50%;">
+
+        <div class="chart-block">
+          <div class="chart-label">EUROSTOXX 50 · 2.7Y</div>
+          <div style="position:relative; height:260px; padding: 8px 12px 12px;">
+            <canvas id="chart_eurostoxx50"></canvas>
+          </div>
+        </div>
+        <script>
+        (function() {
+          var labels  = ["2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+          var closes  = [4174.66, 4061.12, 4382.47, 4521.65, 4648.4, 4877.77, 5083.42, 4921.22, 4983.67, 4894.02, 4872.94, 4957.98, 5000.45, 4827.63, 4804.4, 4869.28, 5286.87, 5463.54, 5248.39, 5160.22, 5366.59, 5303.24, 5319.92, 5367.08, 5529.96, 5662.04, 5668.17, 5796.22, 5947.81005859375, 6138.41015625, 5569.72998046875, 5881.509765625];
+          var indices = [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,4.0,4.0,6.0,3.0,4.0,null,4.0,4.0,4.0,null,4.0,4.0,4.0,4.0,4.0,4.0];
+          var ctx = document.getElementById('chart_eurostoxx50').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Close', data: closes, yAxisID: 'yClose',
+                  borderColor: '#c8a96e', backgroundColor: 'transparent',
+                  borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, order: 2
+                },
+                {
+                  label: 'Val Index', data: indices, yAxisID: 'yIndex',
+                  borderColor: '#5eead4', backgroundColor: 'transparent',
+                  borderWidth: 1.5, borderDash: [4,3],
+                  pointRadius: 0, pointHoverRadius: 4,
+                  tension: 0.2, spanGaps: true, order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { labels: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 10 }, boxWidth: 12, padding: 12 } },
+                tooltip: {
+                  backgroundColor: '#1c1e27', borderColor: 'rgba(255,255,255,0.13)', borderWidth: 1,
+                  titleColor: '#7a7e8e', bodyColor: '#e8eaf0',
+                  titleFont: { family: "'DM Mono', monospace", size: 10 },
+                  bodyFont:  { family: "'DM Mono', monospace", size: 11 },
+                  callbacks: {
+                    label: function(ctx) {
+                      var val = ctx.parsed.y;
+                      if (val === null) return null;
+                      if (ctx.dataset.label === 'Val Index') return ' Val Index: ' + val.toFixed(0) + '/25';
+                      return ' Close: ' + val.toLocaleString(undefined, {maximumFractionDigits: 1});
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ticks: { color: '#7a7e8e', font: { family: "'DM Mono', monospace", size: 9 },
+                    maxTicksLimit: Math.ceil(labels.length / 6), maxRotation: 0 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yClose: {
+                  type: 'linear', position: 'left',
+                  ticks: { color: '#c8a96e', font: { family: "'DM Mono', monospace", size: 9 }, maxTicksLimit: 5 },
+                  grid: { color: 'rgba(255,255,255,0.05)' }, border: { color: 'rgba(255,255,255,0.07)' }
+                },
+                yIndex: {
+                  type: 'linear', position: 'right', min: 1, max: 25,
+                  ticks: { color: '#5eead4', font: { family: "'DM Mono', monospace", size: 9 }, stepSize: 6 },
+                  grid: { drawOnChartArea: false }, border: { color: 'rgba(255,255,255,0.07)' }
+                }
+              }
+            }
+          });
+        })();
+        </script>
+  </div>
+
+</div>
+<!-- ═══ SECTION 05: HEATMAPS ═══ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">PER × EPS YoY 히트맵</span>
+  </div>
+  <div class="section-sub">행: PER 퀀타일 (P1=저평가, P5=고평가) · 열: EPS YoY 퀀타일 (E1=최저, E5=최고) · 값: 1년 선행 평균 수익률</div>
+
+  <div class="chart-grid-2" style="margin-bottom:24px;">
+
+  <div>
+    <div class="section-sub" style="margin-bottom:8px;">S&P 500</div>
+    <div class="chart-block" style="padding:0;">
+      <div class="hm-grid">
+        <div class="hm-grid-header"></div><div class="hm-grid-header">E1</div><div class="hm-grid-header">E2</div><div class="hm-grid-header">E3</div><div class="hm-grid-header">E4</div><div class="hm-grid-header">E5</div>
+        <div class="hm-row-label">P1</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+15.8%</span><span class="cnt">n=32</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.3%</span><span class="cnt">n=31</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.3%</span><span class="cnt">n=46</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+9.5%</span><span class="cnt">n=30</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.2%</span><span class="cnt">n=36</span></div><div class="hm-row-label">P2</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+15.0%</span><span class="cnt">n=23</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+17.2%</span><span class="cnt">n=33</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.0%</span><span class="cnt">n=34</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.7%</span><span class="cnt">n=32</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.6%</span><span class="cnt">n=53</span></div><div class="hm-row-label">P3</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+16.9%</span><span class="cnt">n=22</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.7%</span><span class="cnt">n=49</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+7.6%</span><span class="cnt">n=31</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.2%</span><span class="cnt">n=45</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+11.1%</span><span class="cnt">n=27</span></div><div class="hm-row-label">P4</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.9%</span><span class="cnt">n=35</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+13.6%</span><span class="cnt">n=33</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+8.8%</span><span class="cnt">n=41</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.2%</span><span class="cnt">n=35</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.2%</span><span class="cnt">n=31</span></div><div class="hm-row-label">P5</div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+4.1%</span><span class="cnt">n=63</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+7.9%</span><span class="cnt">n=29</span></div><div class="hm-grid-cell current" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+9.0%</span><span class="cnt">n=22</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+11.5%</span><span class="cnt">n=33</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+2.6%</span><span class="cnt">n=28</span></div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px;padding-left:4px;">
+      현재 위치: P5×E3 → 기대수익률 <span style="color:#3ecf82;">+9.02%</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-sub" style="margin-bottom:8px;">KOSPI 200</div>
+    <div class="chart-block" style="padding:0;">
+      <div class="hm-grid">
+        <div class="hm-grid-header"></div><div class="hm-grid-header">E1</div><div class="hm-grid-header">E2</div><div class="hm-grid-header">E3</div><div class="hm-grid-header">E4</div><div class="hm-grid-header">E5</div>
+        <div class="hm-row-label">P1</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+11.4%</span><span class="cnt">n=3</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+18.4%</span><span class="cnt">n=5</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+32.0%</span><span class="cnt">n=13</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+3.1%</span><span class="cnt">n=15</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+17.0%</span><span class="cnt">n=20</span></div><div class="hm-row-label">P2</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.6%</span><span class="cnt">n=3</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+19.6%</span><span class="cnt">n=5</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+9.5%</span><span class="cnt">n=19</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+37.7%</span><span class="cnt">n=12</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.8%</span><span class="cnt">n=15</span></div><div class="hm-row-label">P3</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+27.4%</span><span class="cnt">n=5</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+18.8%</span><span class="cnt">n=13</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+0.8%</span><span class="cnt">n=12</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+16.3%</span><span class="cnt">n=19</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-6.9%</span><span class="cnt">n=7</span></div><div class="hm-row-label">P4</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+14.6%</span><span class="cnt">n=9</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+4.5%</span><span class="cnt">n=30</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-2.5%</span><span class="cnt">n=7</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.8%</span><span class="cnt">n=5</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+21.9%</span><span class="cnt">n=4</span></div><div class="hm-row-label">P5</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+16.0%</span><span class="cnt">n=36</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-34.3%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+3.5%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell current" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-20.7%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-10.6%</span><span class="cnt">n=10</span></div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px;padding-left:4px;">
+      현재 위치: P5×E4 → 기대수익률 <span style="color:#e05c5c;">-20.74%</span>
+    </div>
+  </div>
+  </div>
+
+  <div class="chart-grid-2" style="margin-bottom:24px;">
+
+  <div>
+    <div class="section-sub" style="margin-bottom:8px;">NIKKEI 225</div>
+    <div class="chart-block" style="padding:0;">
+      <div class="hm-grid">
+        <div class="hm-grid-header"></div><div class="hm-grid-header">E1</div><div class="hm-grid-header">E2</div><div class="hm-grid-header">E3</div><div class="hm-grid-header">E4</div><div class="hm-grid-header">E5</div>
+        <div class="hm-row-label">P1</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+50.8%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+15.2%</span><span class="cnt">n=16</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+28.5%</span><span class="cnt">n=10</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+15.2%</span><span class="cnt">n=8</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+1.1%</span><span class="cnt">n=9</span></div><div class="hm-row-label">P2</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.0%</span><span class="cnt">n=8</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+13.8%</span><span class="cnt">n=14</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.4%</span><span class="cnt">n=10</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+4.5%</span><span class="cnt">n=13</span></div><div class="hm-row-label">P3</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+11.8%</span><span class="cnt">n=3</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+19.4%</span><span class="cnt">n=10</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.5%</span><span class="cnt">n=13</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+13.2%</span><span class="cnt">n=10</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-4.3%</span><span class="cnt">n=9</span></div><div class="hm-row-label">P4</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.8%</span><span class="cnt">n=9</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.9%</span><span class="cnt">n=5</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-2.8%</span><span class="cnt">n=16</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-17.6%</span><span class="cnt">n=6</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-1.6%</span><span class="cnt">n=9</span></div><div class="hm-row-label">P5</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+8.4%</span><span class="cnt">n=23</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+0.2%</span><span class="cnt">n=6</span></div><div class="hm-grid-cell current" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-5.7%</span><span class="cnt">n=11</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+8.5%</span><span class="cnt">n=6</span></div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px;padding-left:4px;">
+      현재 위치: P5×E4 → 기대수익률 <span style="color:#e05c5c;">-5.65%</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-sub" style="margin-bottom:8px;">CSI 300</div>
+    <div class="chart-block" style="padding:0;">
+      <div class="hm-grid">
+        <div class="hm-grid-header"></div><div class="hm-grid-header">E1</div><div class="hm-grid-header">E2</div><div class="hm-grid-header">E3</div><div class="hm-grid-header">E4</div><div class="hm-grid-header">E5</div>
+        <div class="hm-row-label">P1</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.2%</span><span class="cnt">n=10</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+5.5%</span><span class="cnt">n=7</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+4.3%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+21.0%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-row-label">P2</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.5%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.7%</span><span class="cnt">n=3</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+0.1%</span><span class="cnt">n=8</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+7.9%</span><span class="cnt">n=6</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+17.0%</span><span class="cnt">n=3</span></div><div class="hm-row-label">P3</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+17.4%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+14.2%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+13.9%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+27.5%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+8.5%</span><span class="cnt">n=8</span></div><div class="hm-row-label">P4</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+16.9%</span><span class="cnt">n=8</span></div><div class="hm-grid-cell" style="background:rgba(212,168,67,0.15);"><span class="ret" style="color:#d4a843;">+2.3%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.9%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-12.7%</span><span class="cnt">n=7</span></div><div class="hm-row-label">P5</div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-21.6%</span><span class="cnt">n=1</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-11.5%</span><span class="cnt">n=6</span></div><div class="hm-grid-cell current" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-0.8%</span><span class="cnt">n=4</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-12.6%</span><span class="cnt">n=8</span></div><div class="hm-grid-cell" style="background:rgba(224,92,92,0.18);"><span class="ret" style="color:#e05c5c;">-11.6%</span><span class="cnt">n=5</span></div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px;padding-left:4px;">
+      현재 위치: P5×E3 → 기대수익률 <span style="color:#e05c5c;">-0.76%</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:50%;">
+
+  <div>
+    <div class="section-sub" style="margin-bottom:8px;">EUROSTOXX 50</div>
+    <div class="chart-block" style="padding:0;">
+      <div class="hm-grid">
+        <div class="hm-grid-header"></div><div class="hm-grid-header">E1</div><div class="hm-grid-header">E2</div><div class="hm-grid-header">E3</div><div class="hm-grid-header">E4</div><div class="hm-grid-header">E5</div>
+        <div class="hm-row-label">P1</div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+17.6%</span><span class="cnt">n=2</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-row-label">P2</div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.30);"><span class="ret" style="color:#3ecf82;">+19.0%</span><span class="cnt">n=1</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-row-label">P3</div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+10.6%</span><span class="cnt">n=1</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-row-label">P4</div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-row-label">P5</div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+14.0%</span><span class="cnt">n=1</span></div><div class="hm-grid-cell" style="background:rgba(122,126,142,0.08);"><span class="ret" style="color:#7a7e8e;">—</span><span class="cnt">n=0</span></div><div class="hm-grid-cell" style="background:rgba(62,207,130,0.10);"><span class="ret" style="color:#7de5b4;">+6.1%</span><span class="cnt">n=1</span></div><div class="hm-grid-cell current" style="background:rgba(62,207,130,0.18);"><span class="ret" style="color:#5fd69a;">+12.4%</span><span class="cnt">n=2</span></div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px;padding-left:4px;">
+      현재 위치: P5×E5 → 기대수익률 <span style="color:#3ecf82;">+12.43%</span>
+    </div>
+  </div>
+  </div>
+
+</div>
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <span class="footer-text">글로벌 시장 밸류에이션 리포트 · 2026-04</span>
+  <span class="footer-text">PER × EPS YoY 크로스 분석 기반 · 투자 참고용</span>
+</div>
+
+</body>
+</html>

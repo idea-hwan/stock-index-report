@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>분석 방법론 — 글로벌 시장 밸류에이션 리포트</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+  --bg:            #0d0f14;
+  --surface:       #161820;
+  --surface2:      #1c1e27;
+  --border:        rgba(255,255,255,0.07);
+  --border2:       rgba(255,255,255,0.13);
+  --text:          #e8eaf0;
+  --muted:         #7a7e8e;
+  --accent:        #c8a96e;
+  --green:         #3ecf82;
+  --green-bg:      rgba(62,207,130,0.12);
+  --green-border:  rgba(62,207,130,0.30);
+  --red:           #e05c5c;
+  --red-bg:        rgba(224,92,92,0.12);
+  --red-border:    rgba(224,92,92,0.30);
+  --yellow:        #d4a843;
+  --yellow-bg:     rgba(212,168,67,0.12);
+  --yellow-border: rgba(212,168,67,0.30);
+  --teal:          #5eead4;
+  --mono:          'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* ── NAV ── */
+.nav {
+  padding: 18px 72px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav a:hover { color: var(--accent); }
+.nav-sep { font-family: var(--mono); font-size: 11px; color: var(--border2); }
+.nav-current { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.05em; }
+
+/* ── HERO ── */
+.hero {
+  padding: 64px 72px 56px;
+  border-bottom: 1px solid var(--border2);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(200,169,110,0.055) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px; font-weight: 700; line-height: 1.2;
+  color: var(--text); margin-bottom: 16px;
+}
+.hero-desc {
+  font-size: 15px; color: var(--muted); max-width: 620px; line-height: 1.85;
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 56px 72px;
+  border-bottom: 1px solid var(--border);
+}
+.section-header {
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: 36px;
+}
+.section-num {
+  font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em;
+}
+.section-title { font-size: 22px; font-weight: 500; color: var(--text); }
+.section-sub {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+}
+.divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+/* ── PROSE ── */
+.prose { font-size: 14px; color: #c4c7d4; line-height: 1.9; max-width: 760px; }
+.prose p { margin-bottom: 18px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 500; }
+.prose code {
+  font-family: var(--mono); font-size: 12px; color: var(--accent);
+  background: rgba(200,169,110,0.10); padding: 1px 6px; border-radius: 3px;
+}
+.hl-g { color: var(--green);  font-weight: 500; }
+.hl-r { color: var(--red);    font-weight: 500; }
+.hl-y { color: var(--yellow); font-weight: 500; }
+.hl-a { color: var(--accent); font-weight: 500; }
+.hl-t { color: var(--teal);   font-weight: 500; }
+
+/* ── STEP LIST ── */
+.steps { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+.step {
+  display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+}
+.step-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(200,169,110,0.12); border: 1px solid rgba(200,169,110,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent);
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-body { padding-top: 6px; }
+.step-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.75; }
+.step-desc strong { color: #c4c7d4; font-weight: 500; }
+
+/* ── HEATMAP DEMO ── */
+.hm-demo {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 24px;
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.hm-demo-title {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+}
+.hm-demo-grid {
+  display: grid;
+  grid-template-columns: 32px repeat(5, 72px);
+  gap: 4px;
+}
+.hm-hdr {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  text-align: center; padding: 4px 2px;
+}
+.hm-row-lbl {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 6px;
+}
+.hm-cell {
+  border-radius: 6px; padding: 8px 4px;
+  text-align: center; position: relative;
+}
+.hm-cell .ret { font-family: var(--mono); font-size: 11px; font-weight: 500; display: block; }
+.hm-cell .cnt { font-family: var(--mono); font-size: 9px; color: var(--muted); display: block; margin-top: 1px; }
+.hm-cell.current { box-shadow: 0 0 0 2px var(--accent); }
+.hm-cell.pos-hi  { background: rgba(62,207,130,0.28); }
+.hm-cell.pos-md  { background: rgba(62,207,130,0.16); }
+.hm-cell.pos-lo  { background: rgba(62,207,130,0.09); }
+.hm-cell.neu     { background: rgba(212,168,67,0.14); }
+.hm-cell.neg     { background: rgba(224,92,92,0.16); }
+.hm-cell.pos-hi .ret { color: #3ecf82; }
+.hm-cell.pos-md .ret { color: #5fd69a; }
+.hm-cell.pos-lo .ret { color: #7de5b4; }
+.hm-cell.neu    .ret { color: #d4a843; }
+.hm-cell.neg    .ret { color: #e05c5c; }
+
+.hm-caption {
+  font-family: var(--mono); font-size: 10px; color: var(--muted);
+  margin-top: 12px; line-height: 1.6;
+}
+
+/* ── INDEX DIAGRAM ── */
+.index-diagram {
+  display: flex; align-items: center; gap: 0; max-width: 600px;
+  margin: 24px 0; border-radius: 8px; overflow: hidden;
+}
+.index-seg {
+  flex: 1; padding: 14px 16px; text-align: center;
+}
+.index-seg.green  { background: rgba(62,207,130,0.12);  border: 1px solid rgba(62,207,130,0.25); }
+.index-seg.yellow { background: rgba(212,168,67,0.12);  border: 1px solid rgba(212,168,67,0.25); border-left: none; border-right: none; }
+.index-seg.red    { background: rgba(224,92,92,0.12);   border: 1px solid rgba(224,92,92,0.25); }
+.index-seg-range {
+  font-family: var(--mono); font-size: 18px; font-weight: 500; display: block; margin-bottom: 4px;
+}
+.index-seg.green  .index-seg-range { color: var(--green); }
+.index-seg.yellow .index-seg-range { color: var(--yellow); }
+.index-seg.red    .index-seg-range { color: var(--red); }
+.index-seg-label { font-size: 12px; color: var(--muted); }
+
+/* ── DATA TABLE ── */
+.data-table-wrap {
+  border: 1px solid var(--border2); border-radius: 10px; overflow: hidden;
+  margin: 20px 0;
+}
+table.data-table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--mono); font-size: 12px;
+}
+.data-table th {
+  background: var(--surface2); color: var(--muted);
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border); font-weight: 400;
+}
+.data-table td {
+  padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.data-table td.muted { color: var(--muted); font-size: 11px; }
+.warn { color: var(--yellow); font-size: 11px; }
+
+/* ── CALLOUT ── */
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+  max-width: 760px;
+  font-size: 13px; color: #c4c7d4; line-height: 1.8;
+}
+.callout strong { color: var(--text); font-weight: 500; }
+.callout.warn-box { border-left-color: var(--yellow); }
+.callout.warn-box strong { color: var(--yellow); }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 24px 72px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-text { font-family: var(--mono); font-size: 10px; color: rgba(122,126,142,0.4); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .nav     { padding: 16px 20px; }
+  .hero    { padding: 40px 20px 36px; }
+  .hero-title { font-size: 28px; }
+  .section { padding: 40px 20px; }
+  .hm-demo-grid { grid-template-columns: 28px repeat(5, 1fr); }
+  .hm-cell { padding: 6px 2px; }
+  .hm-cell .ret { font-size: 10px; }
+  .hm-cell .cnt { font-size: 8px; }
+  .index-diagram { flex-direction: column; }
+  .index-seg.yellow { border: 1px solid rgba(212,168,67,0.25); border-top: none; border-bottom: none; }
+  .footer { flex-direction: column; gap: 6px; padding: 20px; text-align: center; }
+  .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">분석 방법론</span>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-label">Methodology</div>
+  <div class="hero-title">어떻게 분석하는가</div>
+  <div class="hero-desc">
+    월간 밸류에이션 리포트가 수치를 어떻게 산출하는지 설명합니다.
+    핵심은 하나입니다 — <strong style="color:var(--text);">현재의 PER과 EPS 성장률 조합이 과거에 반복됐을 때, 1년 뒤 수익률은 어땠는가.</strong>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 01: 전체 흐름
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">분석 전체 흐름</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">장기 데이터 수집</div>
+        <div class="step-desc">Bloomberg에서 각 지수의 월별 <strong>종가·PER·PBR·배당수익률·EPS(Earnings Per Share)</strong>를 수집합니다. S&P500은 약 30년, KOSPI200은 약 24년, NIKKEI225는 약 21년 분량의 데이터를 사용합니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">퀀타일 경계 산출</div>
+        <div class="step-desc">전체 관측 기간을 기준으로 <strong>PER과 EPS YoY(전년 대비 EPS 성장률)를 각각 5개 퀀타일</strong>로 분류합니다. 새 데이터가 추가될수록 퀀타일 경계는 매월 갱신됩니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">5×5 히트맵 구성</div>
+        <div class="step-desc">PER 퀀타일(P1–P5) × EPS YoY 퀀타일(E1–E5) = <strong>25개 조합</strong>. 각 셀에 해당 조건이 발생한 모든 과거 월을 모읍니다. 그 월들의 <strong>1년 선행 수익률 평균</strong>을 셀 값으로 표시합니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">현재 위치 파악</div>
+        <div class="step-desc">이번 달의 PER과 EPS YoY가 어느 퀀타일에 해당하는지 계산해 <strong>현재 조합(예: P5×E3)</strong>을 특정합니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <div class="step-title">밸류에이션 인덱스 산출</div>
+        <div class="step-desc">25개 셀을 <strong>기대수익률 순으로 정렬</strong>해 현재 셀의 순위를 밸류에이션 인덱스로 부여합니다. <span class="hl-g">1/25 = 역사적으로 가장 높은 수익률이 기대되는 조합</span>, <span class="hl-r">25/25 = 가장 낮은</span>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 02: PER × EPS YoY 퀀타일
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">PER × EPS YoY 퀀타일 구분</span>
+  </div>
+
+  <div class="prose">
+    <p>퀀타일은 전체 관측 기간의 데이터 분포를 <strong>5등분</strong>해 결정합니다.</p>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-sub">PER 퀀타일 — P1(저PER·저평가) → P5(고PER·고평가)</div>
+  <div class="callout">
+    전체 기간 PER 분포를 20% 단위로 나눕니다. P1은 하위 20%(역사적으로 가장 싼 구간), P5는 상위 20%(역사적으로 가장 비싼 구간)입니다. 퀀타일 경계는 새 데이터가 추가될 때마다 재계산됩니다.
+  </div>
+
+  <div class="section-sub" style="margin-top:28px;">EPS YoY 퀀타일 — E1(EPS 성장 부진) → E5(EPS 성장 호조)</div>
+  <div class="callout">
+    전년 동기 대비 EPS 성장률을 동일하게 5등분합니다. E1은 하위 20%(EPS 감소 또는 최저 성장), E5는 상위 20%(최고 성장)입니다.
+  </div>
+
+  <div class="callout warn-box" style="margin-top:8px;">
+    <strong>주의</strong> — PER과 EPS YoY의 높고 낮음이 항상 좋고 나쁨을 의미하지 않습니다. 히트맵이 보여주는 것은 <strong>"그 조합에서 역사적으로 어떤 수익률이 나왔는가"</strong>이며, 단순한 고PER = 나쁨 판단과는 다릅니다.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 03: 히트맵
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">히트맵 읽는 법</span>
+  </div>
+
+  <div class="prose" style="margin-bottom:32px;">
+    <p>히트맵의 각 셀은 해당 조합이 과거에 발생했을 때 <strong>이후 12개월 수익률의 평균</strong>을 보여줍니다. 굵은 테두리 셀이 현재 위치입니다.</p>
+  </div>
+
+  <!-- Demo heatmap: SP500 April 2026 -->
+  <div class="hm-demo">
+    <div class="hm-demo-title">예시 — S&amp;P 500 히트맵 (2026-04 기준)</div>
+    <div class="hm-demo-grid">
+      <!-- Header row -->
+      <div class="hm-hdr"></div>
+      <div class="hm-hdr">E1<br><span style="font-size:8px;color:var(--muted);">EPS 최저</span></div>
+      <div class="hm-hdr">E2</div>
+      <div class="hm-hdr">E3</div>
+      <div class="hm-hdr">E4</div>
+      <div class="hm-hdr">E5<br><span style="font-size:8px;color:var(--muted);">EPS 최고</span></div>
+      <!-- P1 row -->
+      <div class="hm-row-lbl">P1<br><span style="font-size:8px;">저PER</span></div>
+      <div class="hm-cell pos-hi"><span class="ret">+15.8%</span><span class="cnt">n=31</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+12.3%</span><span class="cnt">n=30</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+12.3%</span><span class="cnt">n=49</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+9.5%</span><span class="cnt">n=28</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+6.2%</span><span class="cnt">n=36</span></div>
+      <!-- P2 row -->
+      <div class="hm-row-lbl">P2</div>
+      <div class="hm-cell pos-hi"><span class="ret">+15.0%</span><span class="cnt">n=22</span></div>
+      <div class="hm-cell pos-hi"><span class="ret">+17.2%</span><span class="cnt">n=33</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+12.0%</span><span class="cnt">n=34</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+5.7%</span><span class="cnt">n=32</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+5.6%</span><span class="cnt">n=53</span></div>
+      <!-- P3 row -->
+      <div class="hm-row-lbl">P3</div>
+      <div class="hm-cell pos-hi"><span class="ret">+16.9%</span><span class="cnt">n=27</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+6.7%</span><span class="cnt">n=45</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+7.6%</span><span class="cnt">n=31</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+5.2%</span><span class="cnt">n=44</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+11.1%</span><span class="cnt">n=27</span></div>
+      <!-- P4 row -->
+      <div class="hm-row-lbl">P4</div>
+      <div class="hm-cell pos-lo"><span class="ret">+5.9%</span><span class="cnt">n=34</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+13.6%</span><span class="cnt">n=37</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+8.8%</span><span class="cnt">n=37</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+6.2%</span><span class="cnt">n=35</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+6.2%</span><span class="cnt">n=31</span></div>
+      <!-- P5 row -->
+      <div class="hm-row-lbl">P5<br><span style="font-size:8px;">고PER</span></div>
+      <div class="hm-cell neu"><span class="ret">+4.1%</span><span class="cnt">n=60</span></div>
+      <div class="hm-cell pos-lo"><span class="ret">+7.9%</span><span class="cnt">n=29</span></div>
+      <div class="hm-cell pos-lo current"><span class="ret">+9.0%</span><span class="cnt">n=23</span></div>
+      <div class="hm-cell pos-md"><span class="ret">+11.5%</span><span class="cnt">n=35</span></div>
+      <div class="hm-cell neu"><span class="ret">+2.6%</span><span class="cnt">n=28</span></div>
+    </div>
+    <div class="hm-caption">
+      굵은 테두리 = 현재 위치 (P5×E3) · n = 해당 조합이 발생한 과거 월 수 · 값 = 이후 12개월 평균 수익률
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="prose">
+    <p>
+      <strong>색상 기준 (기대수익률)</strong><br>
+      <span class="hl-g">■ 짙은 초록 ≥ +15%</span> &nbsp;
+      <span class="hl-g" style="opacity:0.7;">■ 연한 초록 +10–15%</span> &nbsp;
+      <span class="hl-t">■ 옅은 초록 +5–10%</span> &nbsp;
+      <span class="hl-y">■ 노랑 0–5%</span> &nbsp;
+      <span class="hl-r">■ 빨강 &lt; 0%</span>
+    </p>
+    <p style="margin-top:14px;">
+      <code>n</code> 값이 작을수록 통계적 신뢰도가 낮습니다. 일반적으로 <strong>n ≥ 20</strong> 이상인 셀을 신뢰 가능한 기준으로 해석합니다.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 04: 밸류에이션 인덱스
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">밸류에이션 인덱스 1/25</span>
+  </div>
+
+  <div class="prose" style="margin-bottom:28px;">
+    <p>히트맵 25개 셀을 <strong>기대수익률 높은 순</strong>으로 1위부터 25위까지 정렬합니다. 현재 조합의 순위가 그달의 <strong>밸류에이션 인덱스</strong>입니다.</p>
+  </div>
+
+  <div class="index-diagram">
+    <div class="index-seg green">
+      <span class="index-seg-range">1 – 8</span>
+      <span class="index-seg-label">저평가<br>기대수익률 상위권</span>
+    </div>
+    <div class="index-seg yellow">
+      <span class="index-seg-range">9 – 18</span>
+      <span class="index-seg-label">중립<br>역사적 평균 수준</span>
+    </div>
+    <div class="index-seg red">
+      <span class="index-seg-range">19 – 25</span>
+      <span class="index-seg-label">고평가<br>기대수익률 하위권</span>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:8px;">
+    인덱스는 절대 수치가 아니라 <strong>상대적 순위</strong>입니다. 1/25라도 기대수익률이 음수일 수 있고, 25/25라도 양수일 수 있습니다. 반드시 해당 셀의 실제 기대수익률(%)과 함께 해석해야 합니다.
+  </div>
+
+  <div class="divider"></div>
+  <div class="prose">
+    <p><strong>인덱스는 매월 재계산됩니다.</strong> 새 달의 데이터가 추가되면 퀀타일 경계와 각 셀의 기대수익률이 미세하게 바뀌고, 순위도 바뀔 수 있습니다. 전월과 인덱스를 비교할 때는 이 점을 감안해야 합니다.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 05: 지수별 데이터 가용 기간
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">지수별 데이터 가용 기간 및 신뢰도</span>
+  </div>
+
+  <div class="prose" style="margin-bottom:24px;">
+    <p>히트맵의 신뢰도는 데이터 기간에 비례합니다. 기간이 길수록 각 셀에 쌓이는 과거 사례 수(<code>n</code>)가 많아지고, 통계적 안정성이 높아집니다.</p>
+  </div>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>지수</th>
+          <th>가용 기간</th>
+          <th>관측 월 수</th>
+          <th>신뢰도</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S&amp;P 500</td>
+          <td>약 30년</td>
+          <td>360개월+</td>
+          <td><span style="color:var(--green);font-family:var(--mono);">★★★★★</span></td>
+          <td class="muted">메인 분석 기준 지수</td>
+        </tr>
+        <tr>
+          <td>KOSPI 200</td>
+          <td>약 24년</td>
+          <td>289개월+</td>
+          <td><span style="color:var(--green);font-family:var(--mono);">★★★★☆</span></td>
+          <td class="muted">충분한 데이터, 단 셀별 n 편차 큼</td>
+        </tr>
+        <tr>
+          <td>NIKKEI 225</td>
+          <td>약 21년</td>
+          <td>250개월+</td>
+          <td><span style="color:var(--green);font-family:var(--mono);">★★★★☆</span></td>
+          <td class="muted">일부 셀 n=0 (미발생 조합)</td>
+        </tr>
+        <tr>
+          <td>CSI 300</td>
+          <td>약 11년</td>
+          <td>132개월+</td>
+          <td><span style="color:var(--yellow);font-family:var(--mono);">★★★☆☆</span></td>
+          <td class="muted">참고 수준, 해석 시 주의</td>
+        </tr>
+        <tr>
+          <td>EUROSTOXX 50</td>
+          <td>약 2.7년</td>
+          <td>32개월+</td>
+          <td><span style="color:var(--red);font-family:var(--mono);">★☆☆☆☆</span></td>
+          <td><span class="warn">⚠ 데이터 부족 — 히트맵 기대수익률 유보</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn-box">
+    <strong>EUROSTOXX50 주의</strong> — 데이터가 약 2.7년(32개월)에 불과해 25개 셀 중 채워진 셀이 극소수입니다. 히트맵 기대수익률은 표시하되 투자 판단 근거로 사용하지 않을 것을 권장합니다.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 06: 개별 지표 해석
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">개별 지표 해석 기준</span>
+  </div>
+
+  <div class="section-sub">밸류에이션 카드 — 고평가 / 중립 / 저평가 판단</div>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>지표</th><th>고평가 (빨강)</th><th>저평가 (초록)</th><th>방향 논리</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PER</td>
+          <td class="muted">현재 &gt; 장기 평균</td>
+          <td class="muted">현재 &lt; 장기 평균</td>
+          <td class="muted">PER이 높을수록 비싸게 사는 것</td>
+        </tr>
+        <tr>
+          <td>PBR</td>
+          <td class="muted">현재 &gt; 장기 평균</td>
+          <td class="muted">현재 &lt; 장기 평균</td>
+          <td class="muted">장부가 대비 주가 프리미엄</td>
+        </tr>
+        <tr>
+          <td>배당수익률</td>
+          <td class="muted">현재 &lt; 장기 평균</td>
+          <td class="muted">현재 &gt; 장기 평균</td>
+          <td class="muted">수익률이 낮을수록 주가가 높음(역수 관계)</td>
+        </tr>
+        <tr>
+          <td>EPS YoY</td>
+          <td class="muted">—</td>
+          <td class="muted">현재 &gt; 장기 평균</td>
+          <td class="muted">성장 호조 = 초록, 부진 = 노랑 (별도 기준)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose" style="margin-top:20px;">
+    <p>장기 평균은 각 지수의 가용 전 기간(S&P500은 30년, KOSPI200은 약 24년 등) 데이터를 기준으로 산출하며, 새 데이터가 추가될 때 매월 미세하게 변합니다.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 07: 매크로 이슈 섹션
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-title">매크로 이슈 섹션 구성</span>
+  </div>
+
+  <div class="prose">
+    <p>리포트의 <strong>Section 02 — 글로벌 매크로 이슈</strong>는 Bloomberg 뉴스를 일별·시간대별(오전/오후)로 요약한 데이터베이스를 기반으로 작성합니다.</p>
+    <p>매 거래일 오전·오후 Bloomberg 뉴스를 수집해 주요 이슈별로 핵심 문장을 추출합니다. 이를 주차(Week 1–4 + Month End)별로 묶어 시장 영향도 중심으로 재구성합니다. 타임라인 하단의 <strong>지수별 임팩트 카드</strong>는 해당 월 주요 이벤트가 각 지수에 미친 영향과 등락률을 요약합니다.</p>
+  </div>
+
+  <div class="callout warn-box" style="margin-top:24px;">
+    <strong>주의</strong> — 매크로 이슈 섹션은 시장 맥락 이해를 위한 참고 자료입니다. 인과관계 분석이 아니며, 특정 사건이 수익률에 직접 영향을 미쳤다는 주장이 아닙니다.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 08: 해석 시 주의사항
+═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-title">해석 시 주의사항</span>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">!</div>
+      <div class="step-body">
+        <div class="step-title">과거 데이터 기반 — 미래 보장 아님</div>
+        <div class="step-desc">히트맵 기대수익률은 과거 유사 조건에서의 <strong>평균</strong>입니다. 개별 사례의 분산이 크며, 과거 패턴이 미래에 반드시 반복된다는 보장이 없습니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">!</div>
+      <div class="step-body">
+        <div class="step-title">n이 작은 셀은 노이즈에 취약</div>
+        <div class="step-desc">n=3~5 수준의 셀은 단 몇 번의 역사적 사례에 기반합니다. 셀 값이 극단적으로 높거나 낮더라도 통계적 신뢰도가 낮습니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">!</div>
+      <div class="step-body">
+        <div class="step-title">단일 지표로 사용하지 말 것</div>
+        <div class="step-desc">밸류에이션 인덱스와 히트맵은 시장의 <strong>밸류에이션 맥락</strong>을 제공합니다. 금리, 통화, 지정학적 리스크 등 다른 요소와 함께 종합적으로 판단해야 합니다.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">!</div>
+      <div class="step-body">
+        <div class="step-title">투자 권고 아님</div>
+        <div class="step-desc">이 리포트는 <strong>투자 참고 자료</strong>로만 활용할 것을 권장합니다. 매수·매도 결정에 대한 책임은 투자자 본인에게 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <span class="footer-text">글로벌 시장 밸류에이션 리포트 · 분석 방법론</span>
+  <span class="footer-text">투자 참고용</span>
+</div>
+
+</body>
+</html>
