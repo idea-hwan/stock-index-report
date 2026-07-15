@@ -280,7 +280,7 @@ table.data-table {
   <div class="hero-title">어떻게 분석하는가</div>
   <div class="hero-desc">
     월간 밸류에이션 리포트가 수치를 어떻게 산출하는지 설명합니다.
-    핵심은 하나입니다 — <strong style="color:var(--text);">현재의 PER과 EPS 성장률 조합이 과거에 반복됐을 때, 1년 뒤 수익률은 어땠는가.</strong>
+    핵심은 하나입니다 — <strong style="color:var(--text);">현재의 PER과 EPS 성장률 조합이 과거에 반복됐을 때, 1년·2년 뒤 수익률은 어땠는가.</strong>
   </div>
 </div>
 
@@ -319,7 +319,7 @@ table.data-table {
       <div class="step-num">4</div>
       <div class="step-body">
         <div class="step-title">5×5 히트맵 구성</div>
-        <div class="step-desc">PER 퀀타일(P1–P5) × EPS YoY 퀀타일(E1–E5) = <strong>25개 조합</strong>. 각 셀에 해당 조건이 발생한 모든 과거 월을 모읍니다. 그 월들의 <strong>1년 선행 수익률 평균</strong>을 셀 값으로 표시합니다.</div>
+        <div class="step-desc">PER 퀀타일(P1–P5) × EPS YoY 퀀타일(E1–E5) = <strong>25개 조합</strong>. 각 셀에 해당 조건이 발생한 모든 과거 월을 모읍니다. 그 월들의 <strong>1년 선행 수익률 평균</strong>과 <strong>2년 선행 수익률(연환산) 평균</strong>을 각각 별도 히트맵 셀 값으로 표시합니다.</div>
       </div>
     </div>
     <div class="step">
@@ -378,12 +378,22 @@ table.data-table {
   </div>
 
   <div class="prose" style="margin-bottom:32px;">
-    <p>히트맵의 각 셀은 해당 조합이 과거에 발생했을 때 <strong>이후 12개월 수익률의 평균</strong>을 보여줍니다. 굵은 테두리 셀이 현재 위치입니다.</p>
+    <p>히트맵의 각 셀은 해당 조합이 과거에 발생했을 때 <strong>이후 12개월 수익률의 평균</strong>을 보여줍니다. 리포트에는 동일한 25개 조합을 <strong>이후 24개월(연환산) 수익률 평균</strong>으로 다시 계산한 두 번째 히트맵이 바로 이어서 실립니다. 굵은 테두리 셀이 현재 위치입니다.</p>
+  </div>
+
+  <div class="callout" style="margin-bottom:32px;">
+    <strong>왜 1년과 2년 두 가지인가</strong> — 이 리포트가 다루는 지수는 단기 트레이딩 대상이 아니라 장기 보유 대상이므로, 선행수익률 윈도우는 "밸류에이션 신호가 가장 뚜렷하게 드러나는 구간"으로 골라야 합니다. S&amp;P500 30년 데이터로 저PER(P1)·고PER(P5) 구간의 연환산 수익률 스프레드를 여러 윈도우로 실측한 결과:
+    <br><br>
+    <span style="font-family:var(--mono);font-size:12px;">
+    1년: 5.4%p · 1.5년: 5.6%p · <strong>2년: 5.5%p</strong> · 3년: 4.6%p · 4년: 3.8%p · 5년: 4.5%p
+    </span>
+    <br><br>
+    스프레드는 1.5~2년에서 최대치를 찍고 3년부터 급격히 줄어듭니다. 윈도우가 길어질수록 지수 자체의 장기 성장 추세가 밸류에이션 효과를 덮어버려 "싸게 사나 비싸게 사나 비슷한" 방향으로 수렴하기 때문입니다. 5년 윈도우는 겹치지 않는 독립 표본이 14개뿐이라 통계적으로도 불안정합니다. 그래서 <strong>1년(단기 반응)과 2년(스프레드 최대 구간)</strong> 두 지표를 함께 보되, 5년·10년처럼 장기 추세가 섞이는 윈도우는 채택하지 않았습니다.
   </div>
 
   <!-- Demo heatmap: SP500 May 2026 -->
   <div class="hm-demo">
-    <div class="hm-demo-title">예시 — S&amp;P 500 히트맵 (2026-05 기준)</div>
+    <div class="hm-demo-title">예시 — S&amp;P 500 히트맵, 1년 선행수익률 기준 (2026-05 기준)</div>
     <div class="hm-demo-grid">
       <!-- Header row -->
       <div class="hm-hdr"></div>
@@ -460,7 +470,7 @@ table.data-table {
   </div>
 
   <div class="prose" style="margin-bottom:28px;">
-    <p>히트맵 25개 셀을 <strong>기대수익률 높은 순</strong>으로 1위부터 25위까지 정렬합니다. 현재 조합의 순위가 그달의 <strong>밸류에이션 인덱스</strong>입니다.</p>
+    <p>히트맵 25개 셀을 <strong>기대수익률 높은 순</strong>으로 1위부터 25위까지 정렬합니다. 현재 조합의 순위가 그달의 <strong>밸류에이션 인덱스</strong>입니다. 이 순위는 <strong>1년 선행수익률 히트맵</strong>을 기준으로 산출됩니다 — 2년 히트맵은 별도 참고용 시각화이며 인덱스 순위 계산에는 포함되지 않습니다.</p>
   </div>
 
   <div class="index-diagram">
